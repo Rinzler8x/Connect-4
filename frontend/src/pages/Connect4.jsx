@@ -7,7 +7,7 @@ function Connect4() {
         <>
             <p>Connect4 Test</p>
             <Link to="/">Home</Link>
-            {/* <Connect4AlphaBeta /> */}
+            <Connect4AlphaBeta />
         </>
     );
 }
