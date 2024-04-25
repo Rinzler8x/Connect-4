@@ -70,13 +70,14 @@ function Connect4AlphaBeta() {
         <>
             <div className="container">
                 <div className="center">
-                    <div className="top-row">
+                    <div className="d-grid d-md-block">
                         {topRowButtons.map((buttonValue, index) => (
                             <button
                                 key={index}
                                 value={buttonValue}
                                 onClick={handleClick}
-                                className="top-row-button"
+                                type="button" 
+                                className="btn btn-secondary me-2"
                             >
                                 Column {buttonValue}
                             </button>
@@ -96,7 +97,7 @@ function Connect4AlphaBeta() {
                     </div>
                     <div>
                         { winnerMessage && <p>{winnerMessage}</p> }    
-                        <button onClick={handleReset}>Reset Game</button>
+                        <button onClick={handleReset} type="button" class="btn btn-secondary">Reset Game</button>
                     </div>
                 </div>
             </div>
