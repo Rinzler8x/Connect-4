@@ -67,38 +67,40 @@ function Connect4AlphaBeta() {
     };
 
     return (
-        <div className="container">
-            <div className="center">
-                <div className="top-row">
-                    {topRowButtons.map((buttonValue, index) => (
-                        <button
-                            key={index}
-                            value={buttonValue}
-                            onClick={handleClick}
-                            className="top-row-button"
-                        >
-                            Column {buttonValue}
-                        </button>
-                    ))}
-                </div>
-                <div className="board-container">
-                    {board.map((row, rowIndex) => (
-                        <div key={rowIndex} className="board-row">
-                            {row.map((cell, cellIndex) => (
-                                <div
-                                    key={cellIndex}
-                                    className={`board-cell ${cell === 1 ? 'red' : cell === 2 ? 'yellow' : ''}`}
-                                ></div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    { winnerMessage && <p>{winnerMessage}</p> }    
-                    <button onClick={handleReset}>Reset Game</button>
+        <>
+            <div className="container">
+                <div className="center">
+                    <div className="top-row">
+                        {topRowButtons.map((buttonValue, index) => (
+                            <button
+                                key={index}
+                                value={buttonValue}
+                                onClick={handleClick}
+                                className="top-row-button"
+                            >
+                                Column {buttonValue}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="board-container">
+                        {board.map((row, rowIndex) => (
+                            <div key={rowIndex} className="board-row">
+                                {row.map((cell, cellIndex) => (
+                                    <div
+                                        key={cellIndex}
+                                        className={`board-cell ${cell === 1 ? 'red' : cell === 2 ? 'yellow' : ''}`}
+                                    ></div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        { winnerMessage && <p>{winnerMessage}</p> }    
+                        <button onClick={handleReset}>Reset Game</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

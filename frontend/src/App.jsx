@@ -6,8 +6,6 @@ function App() {
   
   return (
     <>
-      {/* <Connect4AlphaBeta />
-      <Connect4MinMax /> */}
       <Home />
     </>
   )
