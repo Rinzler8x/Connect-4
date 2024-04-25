@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useDebugValue, useEffect, useState } from 'react';
 import './styleConnect4AlphaBeta.css';
 
 function Connect4AlphaBeta() {
     const [board, setBoard] = useState([]);
     const [topRowButtons, setTopRowButtons] = useState([0, 1, 2, 3, 4, 5, 6]);
     const [winnerMessage, setWinnerMessage] = useState("")
+
+    useEffect(() => {
+        handleReset();
+    }, []);
 
     const handleClick = (event) => {
         const buttonValue = event.target.value;
