@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styleConnect4AlphaBeta.css';
+import './components stylesheets/styleConnect4AlphaBeta.css';
 
 function Connect4MinMax() {
     const [board, setBoard] = useState([]);
