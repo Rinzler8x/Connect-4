@@ -1,4 +1,4 @@
-import React, { useDebugValue, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './components stylesheets/styleConnect4AlphaBeta.css';
 
 function Connect4AlphaBeta() {
@@ -19,50 +19,50 @@ function Connect4AlphaBeta() {
             },
             body: JSON.stringify({ value: buttonValue }),
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Player turn:', data);
-            setBoard(data.board);
-            if(data.message){
-                setWinnerMessage(data.message);
-            }
-            if(!data.game_over){
-                callAiTurn();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Player turn:', data);
+                setBoard(data.board);
+                if (data.message) {
+                    setWinnerMessage(data.message);
+                }
+                if (!data.game_over) {
+                    callAiTurn();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
 
     const handleReset = () => {
         fetch('http://localhost:8000/api/connect-4/alpha-beta/reset-click', {
             method: 'POST',
         })
-        .then(response => response.json())
-        .then(data => {
-            setBoard(data.board);
-            setWinnerMessage("");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    };
-
-    const callAiTurn = () =>{
-        setTimeout(() => {
-            fetch('http://localhost:8000/api/connect-4/alpha-beta/ai-turn')
             .then(response => response.json())
             .then(data => {
-                console.log('AI turn:', data);
                 setBoard(data.board);
-                if(data.message){
-                    setWinnerMessage(data.message);
-                }
+                setWinnerMessage("");
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+    };
+
+    const callAiTurn = () => {
+        setTimeout(() => {
+            fetch('http://localhost:8000/api/connect-4/alpha-beta/ai-turn')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('AI turn:', data);
+                    setBoard(data.board);
+                    if (data.message) {
+                        setWinnerMessage(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }, 0);
     };
 
@@ -76,7 +76,7 @@ function Connect4AlphaBeta() {
                                 key={index}
                                 value={buttonValue}
                                 onClick={handleClick}
-                                type="button" 
+                                type="button"
                                 className="btn btn-secondary me-2"
                             >
                                 Column {buttonValue}
@@ -96,7 +96,7 @@ function Connect4AlphaBeta() {
                         ))}
                     </div>
                     <div>
-                        { winnerMessage && <p>{winnerMessage}</p> }    
+                        {winnerMessage && <p>{winnerMessage}</p>}
                         <button onClick={handleReset} type="button" class="btn btn-secondary">Reset Game</button>
                     </div>
                 </div>
