@@ -246,7 +246,7 @@ async def ai_turn():
                 np_board = board_flipped.tolist()
                 if winning_move(board, AI_PIECE):
                     reset_board()
-                    game_over = True
+                    # game_over = True
                     return {"message":"Player 2 Wins!", "board": np_board, "game_over": game_over}
                 turn += 1
                 turn %= 2

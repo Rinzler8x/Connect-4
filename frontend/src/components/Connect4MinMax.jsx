@@ -15,50 +15,50 @@ function Connect4MinMax() {
             },
             body: JSON.stringify({ value: buttonValue }),
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Player turn:', data);
-            setBoard(data.board);
-            if(data.message){
-                setWinnerMessage(data.message);
-            }
-            if(!data.game_over){
-                callAiTurn();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Player turn:', data);
+                setBoard(data.board);
+                if (data.message) {
+                    setWinnerMessage(data.message);
+                }
+                if (!data.game_over) {
+                    callAiTurn();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
 
     const handleReset = () => {
         fetch('http://localhost:8001/api/connect-4/min-max/reset-click', {
             method: 'POST',
         })
-        .then(response => response.json())
-        .then(data => {
-            setBoard(data.board);
-            setWinnerMessage("");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    };
-
-    const callAiTurn = () =>{
-        setTimeout(() => {
-            fetch('http://localhost:8001/api/connect-4/min-max/ai-turn')
             .then(response => response.json())
             .then(data => {
-                console.log('AI turn:', data);
                 setBoard(data.board);
-                if(data.message){
-                    setWinnerMessage(data.message);
-                }
+                setWinnerMessage("");
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+    };
+
+    const callAiTurn = () => {
+        setTimeout(() => {
+            fetch('http://localhost:8001/api/connect-4/min-max/ai-turn')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('AI turn:', data);
+                    setBoard(data.board);
+                    if (data.message) {
+                        setWinnerMessage(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }, 0);
     };
 
@@ -90,7 +90,7 @@ function Connect4MinMax() {
                     ))}
                 </div>
                 <div>
-                    { winnerMessage && <p>{winnerMessage}</p> }    
+                    {winnerMessage && <p>{winnerMessage}</p>}
                     <button onClick={handleReset}>Reset Game</button>
                 </div>
             </div>

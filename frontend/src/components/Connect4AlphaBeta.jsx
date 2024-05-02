@@ -12,7 +12,7 @@ function Connect4AlphaBeta() {
 
     const handleClick = (event) => {
         const buttonValue = event.target.value;
-        fetch('http://localhost:8000/api/connect-4/alpha-beta/player-turn', {
+        fetch('http://localhost:8002/api/connect-4/alpha-beta/player-turn', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ function Connect4AlphaBeta() {
     };
 
     const handleReset = () => {
-        fetch('http://localhost:8000/api/connect-4/alpha-beta/reset-click', {
+        fetch('http://localhost:8002/api/connect-4/alpha-beta/reset-click', {
             method: 'POST',
         })
             .then(response => response.json())
@@ -51,7 +51,7 @@ function Connect4AlphaBeta() {
 
     const callAiTurn = () => {
         setTimeout(() => {
-            fetch('http://localhost:8000/api/connect-4/alpha-beta/ai-turn')
+            fetch('http://localhost:8002/api/connect-4/alpha-beta/ai-turn')
                 .then(response => response.json())
                 .then(data => {
                     console.log('AI turn:', data);
