@@ -25,7 +25,7 @@ function PlayCard() {
         <div className="row row-cols-1 row-cols-md-3 g-4 ">
 
           {/* PvP card */}
-          <div className="col d-flex justify-content-center">
+          <div className="col d-flex justify-content-center my-3">
             <Card
               header={"P v P"}
               title={"Player vs Player"}
@@ -35,7 +35,7 @@ function PlayCard() {
           </div>
 
           {/* easy card */}
-          <div className="col d-flex justify-content-center">
+          <div className="col d-flex justify-content-center my-3">
             <Card
               header={"Easy"}
               title={"Player vs AI"}
@@ -45,7 +45,7 @@ function PlayCard() {
           </div>
 
           {/* hard card */}
-          <div className="col d-flex justify-content-center">
+          <div className="col d-flex justify-content-center my-3">
             <Card
               header={"Hard"}
               title={"Player vs AI"}
