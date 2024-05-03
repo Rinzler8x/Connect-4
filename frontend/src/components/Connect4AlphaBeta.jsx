@@ -26,7 +26,7 @@ function Connect4AlphaBeta() {
                 if (data.message) {
                     setWinnerMessage(data.message);
                 }
-                if (!data.game_over) {
+                if (data.turn == 1) {
                     callAiTurn();
                 }
             })
@@ -43,6 +43,11 @@ function Connect4AlphaBeta() {
             .then(data => {
                 setBoard(data.board);
                 setWinnerMessage("");
+                if (data.turn == 1) {
+                    setTimeout(() => {
+                        callAiTurn();
+                    }, 500);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -97,7 +102,7 @@ function Connect4AlphaBeta() {
                     </div>
                     <div>
                         {winnerMessage && <p>{winnerMessage}</p>}
-                        <button onClick={handleReset} type="button" class="btn btn-secondary">Reset Game</button>
+                        <button onClick={handleReset} type="button" className="btn btn-secondary">Reset Game</button>
                     </div>
                 </div>
             </div>

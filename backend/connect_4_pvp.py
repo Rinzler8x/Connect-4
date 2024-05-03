@@ -2,6 +2,7 @@ import numpy as np # type: ignore
 from fastapi import FastAPI # type: ignore
 from pydantic import BaseModel # type: ignore
 from fastapi.middleware.cors import CORSMiddleware # type: ignore
+import random
 
 app = FastAPI()
 app.add_middleware(
@@ -59,25 +60,22 @@ def winning_move(board, piece):
 			if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c+2] == piece and board[r-3][c+3] == piece:
 				return True
 
-board = create_board() 
-game_over = False
+board = create_board()
 turn = 0
 
 class ButtonClick(BaseModel):
     value: str
 
 def reset_board():
-    global board, game_over, turn
+    global board, turn
     board = create_board()
-    game_over = False
-    turn = 0
+    turn = random.randint(PLAYER1, PLAYER2)
     
 @app.post("/api/connect-4/pvp/reset-click")
 async def reset_click():
-    global board, game_over, turn
+    global board, turn
     board = create_board()
-    game_over = False
-    turn = 0
+    turn = random.randint(PLAYER1, PLAYER2)
     board_flipped = np.flip(board, 0)
     np_board = board_flipped.tolist()
     return {"board": np_board}
@@ -85,34 +83,34 @@ async def reset_click():
 @app.post("/api/connect-4/pvp/player-turn")
 async def button_click(button_click: ButtonClick):
   col = int(button_click.value)
-  global turn, game_over
-  while not game_over:
-    if turn == PLAYER1:
-      if is_valid_location(board, col):
-        row = get_next_open_row(board, col)
-        drop_piece(board, row, col, PLAYER1_PIECE)
+  global turn
+  
+  if not is_valid_location(board, col):
+        # Column is full, return an appropriate response
         board_flipped = np.flip(board, 0)
         np_board = board_flipped.tolist()
-        if winning_move(board, PLAYER1_PIECE):
-          reset_board() 
-          # game_over = True
-          return {"message":"Player 1 Wins!", "board": np_board, "game_over": game_over}
+        return {"message": "Column is full, choose another column.", "board": np_board, "turn": turn}
+  
+  if turn == PLAYER1:
+    row = get_next_open_row(board, col)
+    drop_piece(board, row, col, PLAYER1_PIECE)
+    board_flipped = np.flip(board, 0)
+    np_board = board_flipped.tolist()
+    if winning_move(board, PLAYER1_PIECE):
+      reset_board()
+      return {"message":"Player 1 Wins!", "board": np_board}
+    
+    turn = PLAYER2
+    return {"received_value": col, "board": np_board, "turn": turn}
         
-        turn += 1
-        turn %= 2
-        return {"received_value": col, "board": np_board, "turn": turn, "game_over": game_over}
-        
-    else:
-      if is_valid_location(board, col):
-        row = get_next_open_row(board, col)
-        drop_piece(board, row, col, PLAYER2_PIECE)
-        board_flipped = np.flip(board, 0)
-        np_board = board_flipped.tolist()
-        if winning_move(board, PLAYER2_PIECE):
-          reset_board() 
-          # game_over = True
-          return {"message":"Player 2 Wins!", "board": np_board, "game_over": game_over}
-        
-        turn += 1
-        turn %= 2
-        return {"received_value": col, "board": np_board, "turn": turn, "game_over": game_over}
+  else:
+    row = get_next_open_row(board, col)
+    drop_piece(board, row, col, PLAYER2_PIECE)
+    board_flipped = np.flip(board, 0)
+    np_board = board_flipped.tolist()
+    if winning_move(board, PLAYER2_PIECE):
+      reset_board() 
+      return {"message":"Player 2 Wins!", "board": np_board}
+    
+    turn = PLAYER1
+    return {"received_value": col, "board": np_board, "turn": turn}

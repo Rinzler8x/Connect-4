@@ -26,7 +26,7 @@ function Connect4MinMax() {
                 if (data.message) {
                     setWinnerMessage(data.message);
                 }
-                if (!data.game_over) {
+                if (data.turn == 1) {
                     callAiTurn();
                 }
             })
@@ -43,6 +43,11 @@ function Connect4MinMax() {
             .then(data => {
                 setBoard(data.board);
                 setWinnerMessage("");
+                if (data.turn == 1) {
+                    setTimeout(() => {
+                        callAiTurn();
+                    }, 500);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);

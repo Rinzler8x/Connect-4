@@ -7,7 +7,6 @@ import Connect4MinMax from "../components/Connect4MinMax";
 function Connect4() {
 
     const location = useLocation();
-
     const query = new URLSearchParams(location.search);
     const gameMode = query.get('gameMode');
 
@@ -21,4 +20,4 @@ function Connect4() {
     );
 }
 
-export default Connect4
+export default Connect4;
