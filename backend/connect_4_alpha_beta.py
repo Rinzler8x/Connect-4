@@ -121,7 +121,7 @@ def is_terminal_node(board):
     return winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
 
 def minimax_alphabeta(board, depth, alpha, beta, maximizingPlayer):
-    valild_locations = get_valid_locations(board)
+    valid_locations = get_valid_locations(board)
     is_terminal = is_terminal_node(board)
     if depth == 0 or is_terminal:
         if is_terminal:
@@ -136,8 +136,8 @@ def minimax_alphabeta(board, depth, alpha, beta, maximizingPlayer):
         
     if maximizingPlayer: #Maximizing AI
         value = -math.inf
-        column = random.choice(valild_locations)
-        for col in valild_locations:
+        column = random.choice(valid_locations)
+        for col in valid_locations:
             row = get_next_open_row(board, col)
             b_copy = board.copy()
             drop_piece(b_copy, row, col, AI_PIECE)
@@ -152,8 +152,8 @@ def minimax_alphabeta(board, depth, alpha, beta, maximizingPlayer):
         
     else: #Minizing player
         value = math.inf
-        column = random.choice(valild_locations)
-        for col in valild_locations:
+        column = random.choice(valid_locations)
+        for col in valid_locations:
             row = get_next_open_row(board, col)
             b_copy = board.copy()
             drop_piece(b_copy, row, col, PLAYER_PIECE)
@@ -166,88 +166,67 @@ def minimax_alphabeta(board, depth, alpha, beta, maximizingPlayer):
                 break
         return column, value
         
-        
- 
 def get_valid_locations(board):
     valid_locations = []
     for col in range(COLUMN_COUNT):
         if is_valid_location(board, col):
             valid_locations.append(col)
     return valid_locations
- 
-def pick_best_move(board, piece):
-    valid_locations = get_valid_locations(board)
-    best_score = -100000
-    best_col = random.choice(valid_locations)
-    for col in valid_locations:
-        row = get_next_open_row(board, col)
-        temp_board = board.copy()
-        drop_piece(temp_board, row, col, piece)
-        score = score_position(temp_board, piece)
-        if score > best_score:
-            best_score = score
-            best_score = col
-    return best_col
                 
 class ButtonClick(BaseModel):
     value: str
 
 board = create_board()
-game_over = False
 turn = 0
 
 def reset_board():
-    global board, game_over, turn
+    global board, turn
     board = create_board()
-    game_over = False
-    turn = 0
+    turn = random.randint(PLAYER, AI)
 
 @app.post("/api/connect-4/alpha-beta/reset-click")
 async def reset_click():
     global board, game_over, turn
     board = create_board()
     game_over = False
-    turn = 0
+    turn = random.randint(PLAYER, AI)
     board_flipped = np.flip(board, 0)
     np_board = board_flipped.tolist()
-    return {"board": np_board}
+    return {"board": np_board, "turn": turn}
 
 @app.post("/api/connect-4/alpha-beta/player-turn")
 async def player_turn(button_click: ButtonClick):
     col = int(button_click.value)
-    global turn, game_over
-    while not game_over:
-        if turn == PLAYER:
-            if is_valid_location(board, col):
-                row = get_next_open_row(board, col)
-                drop_piece(board, row, col, PLAYER_PIECE)
-                board_flipped = np.flip(board, 0)
-                np_board = board_flipped.tolist()
-                if winning_move(board, PLAYER_PIECE):
-                    reset_board() 
-                    game_over = True
-                    return {"message":"Player 1 Wins!", "board": np_board, "game_over": game_over}
-                turn += 1
-                turn %= 2
-                return {"received_value": col, "board": np_board, "turn": turn, "game_over": game_over}
+    global turn
+    
+    if not is_valid_location(board, col):
+        # Column is full, return an appropriate response
+        board_flipped = np.flip(board, 0)
+        np_board = board_flipped.tolist()
+        return {"message": "Column is full, choose another column.", "board": np_board, "turn": turn}
+    
+    if turn == PLAYER:
+        row = get_next_open_row(board, col)
+        drop_piece(board, row, col, PLAYER_PIECE)
+        board_flipped = np.flip(board, 0)
+        np_board = board_flipped.tolist()
+        if winning_move(board, PLAYER_PIECE):
+            reset_board() 
+            return {"message":"Player 1 Wins!", "board": np_board}
+        turn = AI
+        return {"received_value": col, "board": np_board, "turn": turn}
 
 @app.get("/api/connect-4/alpha-beta/ai-turn")
 async def ai_turn():
-    global turn, game_over
-    while not game_over:
-        # col = random.randint(0, COLUMN_COUNT - 1)
-        # col = pick_best_move(board, AI_PIECE)
-        col, minimax_alphabeta_score = minimax_alphabeta(board, 6, -math.inf, math.inf, True)
-        if turn == AI and not game_over:
-            if is_valid_location(board, col):
-                row = get_next_open_row(board, col)
-                drop_piece(board, row, col, AI_PIECE)
-                board_flipped = np.flip(board, 0)
-                np_board = board_flipped.tolist()
-                if winning_move(board, AI_PIECE):
-                    reset_board()
-                    game_over = True
-                    return {"message":"Player 2 Wins!", "board": np_board, "game_over": game_over}
-                turn += 1
-                turn %= 2
-                return {"received_value": col, "board": np_board, "turn": turn, "game_over": game_over}
+    global turn
+    col, minimax_alphabeta_score = minimax_alphabeta(board, 6, -math.inf, math.inf, True)
+    if turn == AI:
+        row = get_next_open_row(board, col)
+        drop_piece(board, row, col, AI_PIECE)
+        board_flipped = np.flip(board, 0)
+        np_board = board_flipped.tolist()
+        if winning_move(board, AI_PIECE):
+            reset_board()
+            return {"message":"Player 2 Wins!", "board": np_board}
+        turn = PLAYER
+        return {"received_value": col, "board": np_board, "turn": turn}

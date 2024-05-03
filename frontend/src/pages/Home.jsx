@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import NavBar from "../components/NavBar";
+import './pages stylesheets/styleHome.css';
+import PlayCard from "../components/PlayCards";
 
 
 function Home() {
-    return(
+    return (
         <>
-            <p>Home Test</p>
-            <Link to="/about">About</Link>
-            <Link to="/connect4">Connect 4</Link>
+            <NavBar />
+            <PlayCard />
         </>
     );
 }

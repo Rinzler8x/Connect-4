@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import './styleConnect4AlphaBeta.css';
+import React, { useEffect, useState } from 'react';
+// import './components stylesheets/styleConnect4AlphaBeta.css';
 
 function Connect4MinMax() {
     const [board, setBoard] = useState([]);
     const [topRowButtons, setTopRowButtons] = useState([0, 1, 2, 3, 4, 5, 6]);
     const [winnerMessage, setWinnerMessage] = useState("")
+
+    useEffect(() => {
+        handleReset();
+    }, [])
 
     const handleClick = (event) => {
         const buttonValue = event.target.value;
@@ -15,63 +19,69 @@ function Connect4MinMax() {
             },
             body: JSON.stringify({ value: buttonValue }),
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Player turn:', data);
-            setBoard(data.board);
-            if(data.message){
-                setWinnerMessage(data.message);
-            }
-            if(!data.game_over){
-                callAiTurn();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Player turn:', data);
+                setBoard(data.board);
+                if (data.message) {
+                    setWinnerMessage(data.message);
+                }
+                if (data.turn == 1) {
+                    callAiTurn();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
 
     const handleReset = () => {
         fetch('http://localhost:8001/api/connect-4/min-max/reset-click', {
             method: 'POST',
         })
-        .then(response => response.json())
-        .then(data => {
-            setBoard(data.board);
-            setWinnerMessage("");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    };
-
-    const callAiTurn = () =>{
-        setTimeout(() => {
-            fetch('http://localhost:8001/api/connect-4/min-max/ai-turn')
             .then(response => response.json())
             .then(data => {
-                console.log('AI turn:', data);
                 setBoard(data.board);
-                if(data.message){
-                    setWinnerMessage(data.message);
+                setWinnerMessage("");
+                if (data.turn == 1) {
+                    setTimeout(() => {
+                        callAiTurn();
+                    }, 500);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+    };
+
+    const callAiTurn = () => {
+        setTimeout(() => {
+            fetch('http://localhost:8001/api/connect-4/min-max/ai-turn')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('AI turn:', data);
+                    setBoard(data.board);
+                    if (data.message) {
+                        setWinnerMessage(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }, 0);
     };
 
     return (
         <div className="container">
             <div className="center">
-                <div className="top-row">
+                <div className="d-grid d-md-block">
                     {topRowButtons.map((buttonValue, index) => (
                         <button
                             key={index}
                             value={buttonValue}
                             onClick={handleClick}
-                            className="top-row-button"
+                            type="button"
+                            className="btn btn-secondary me-2"
                         >
                             Column {buttonValue}
                         </button>
@@ -90,8 +100,8 @@ function Connect4MinMax() {
                     ))}
                 </div>
                 <div>
-                    { winnerMessage && <p>{winnerMessage}</p> }    
-                    <button onClick={handleReset}>Reset Game</button>
+                    {winnerMessage && <p>{winnerMessage}</p>}
+                    <button onClick={handleReset} type="button" class="btn btn-secondary">Reset Game</button>
                 </div>
             </div>
         </div>
