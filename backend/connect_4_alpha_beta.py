@@ -121,7 +121,7 @@ def is_terminal_node(board):
     return winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
 
 def minimax_alphabeta(board, depth, alpha, beta, maximizingPlayer):
-    valild_locations = get_valid_locations(board)
+    valid_locations = get_valid_locations(board)
     is_terminal = is_terminal_node(board)
     if depth == 0 or is_terminal:
         if is_terminal:
@@ -136,8 +136,8 @@ def minimax_alphabeta(board, depth, alpha, beta, maximizingPlayer):
         
     if maximizingPlayer: #Maximizing AI
         value = -math.inf
-        column = random.choice(valild_locations)
-        for col in valild_locations:
+        column = random.choice(valid_locations)
+        for col in valid_locations:
             row = get_next_open_row(board, col)
             b_copy = board.copy()
             drop_piece(b_copy, row, col, AI_PIECE)
@@ -152,8 +152,8 @@ def minimax_alphabeta(board, depth, alpha, beta, maximizingPlayer):
         
     else: #Minizing player
         value = math.inf
-        column = random.choice(valild_locations)
-        for col in valild_locations:
+        column = random.choice(valid_locations)
+        for col in valid_locations:
             row = get_next_open_row(board, col)
             b_copy = board.copy()
             drop_piece(b_copy, row, col, PLAYER_PIECE)
