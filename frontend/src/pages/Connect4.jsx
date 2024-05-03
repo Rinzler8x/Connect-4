@@ -8,30 +8,15 @@ function Connect4() {
 
     const location = useLocation();
 
-    const useQuery = () => {
-        return new URLSearchParams(location.search);
-    }
-
-    const query = useQuery();
+    const query = new URLSearchParams(location.search);
     const gameMode = query.get('gameMode');
 
     return (
         <>
             <NavBar />
-            if(gameMode === 'pvp'){
-                console.log("pvp")
-                // <Connect4PvP />
-            }
-
-            if(gameMode === 'easy'){
-                console.log("easy")
-                // <Connect4MinMax />
-            }
-
-            if(gameMode === 'hard'){
-                console.log("hard")
-                // <Connect4AlphaBeta />
-            }
+            {gameMode === 'pvp' && <Connect4PvP />}
+            {gameMode === 'easy' && <Connect4MinMax />}
+            {gameMode === 'hard' && <Connect4AlphaBeta />}
         </>
     );
 }

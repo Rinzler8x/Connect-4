@@ -1,20 +1,21 @@
 import { Link } from "react-router-dom";
+import pvpImage from '../assets/pvp.png';
 
 function Card({ header, title, description, buttonMargin, path }) {
 
   return (
     <>
-      <div className="card border-info text-center" style={{ width: '18rem' }}>
+      <div className="card border-info text-center" style={{ width: '20rem' }}>
         <div className="card-header">{header}</div>
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
+        <img src={pvpImage} className="card-img-top my-2 mx-auto" alt="image" style={{ width: '256px', height: '256px' }} />
+        <div className="card-body border-top">
+          <h5 className="card-title mt-3">{title}</h5>
           <p className="card-text">{description}</p>
           <Link to={path} className={buttonMargin}>Start</Link>
         </div>
       </div >
     </>
   );
-
 }
 
 
@@ -29,8 +30,8 @@ function PlayCard() {
             <Card
               header={"P v P"}
               title={"Player vs Player"}
-              description={"2 players goes head to head."}
-              buttonMargin={"btn btn-dark btn-outline-light mt-4"}
+              description={"2 players go head to head."}
+              buttonMargin={"btn btn-dark btn-outline-light mt-3"}
               path={"/connect4/?gameMode=pvp"} />
           </div>
 
@@ -40,7 +41,7 @@ function PlayCard() {
               header={"Easy"}
               title={"Player vs AI"}
               description={"Player goes head to head with AI."}
-              buttonMargin={"btn btn-dark btn-outline-light"}
+              buttonMargin={"btn btn-dark btn-outline-light mt-3"}
               path={"/connect4/?gameMode=easy"} />
           </div>
 
@@ -50,13 +51,13 @@ function PlayCard() {
               header={"Hard"}
               title={"Player vs AI"}
               description={"Player goes head to head with AI."}
-              buttonMargin={"btn btn-dark btn-outline-light"}
+              buttonMargin={"btn btn-dark btn-outline-light mt-3"}
               path={"/connect4/?gameMode=hard"} />
           </div>
-        </div>
+        </div >
       </div>
     </>
-  )
+  );
 }
 
 export default PlayCard;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './components stylesheets/styleConnect4AlphaBeta.css';
+// import './components stylesheets/styleConnect4AlphaBeta.css';
 
 function Connect4AlphaBeta() {
     const [board, setBoard] = useState([]);

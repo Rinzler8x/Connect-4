@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import './components stylesheets/styleConnect4AlphaBeta.css';
+import React, { useEffect, useState } from 'react';
+// import './components stylesheets/styleConnect4AlphaBeta.css';
 
 function Connect4MinMax() {
     const [board, setBoard] = useState([]);
     const [topRowButtons, setTopRowButtons] = useState([0, 1, 2, 3, 4, 5, 6]);
     const [winnerMessage, setWinnerMessage] = useState("")
+
+    useEffect(() => {
+        handleReset();
+    }, [])
 
     const handleClick = (event) => {
         const buttonValue = event.target.value;
@@ -65,13 +69,14 @@ function Connect4MinMax() {
     return (
         <div className="container">
             <div className="center">
-                <div className="top-row">
+                <div className="d-grid d-md-block">
                     {topRowButtons.map((buttonValue, index) => (
                         <button
                             key={index}
                             value={buttonValue}
                             onClick={handleClick}
-                            className="top-row-button"
+                            type="button"
+                            className="btn btn-secondary me-2"
                         >
                             Column {buttonValue}
                         </button>
@@ -91,7 +96,7 @@ function Connect4MinMax() {
                 </div>
                 <div>
                     {winnerMessage && <p>{winnerMessage}</p>}
-                    <button onClick={handleReset}>Reset Game</button>
+                    <button onClick={handleReset} type="button" class="btn btn-secondary">Reset Game</button>
                 </div>
             </div>
         </div>

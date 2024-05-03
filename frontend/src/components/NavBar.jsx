@@ -6,7 +6,7 @@ function NavBar() {
         <>
             <nav className="navbar bg-dark fixed-top border-bottom border-body " data-bs-theme="dark">
                 <div className="container-fluid">
-                    <Link className="navbar-brand tabs" to="/">
+                    <Link className="navbar-brand tabs fs-4" to="/">
                         {/* <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" /> */}
                         Connect 4
                     </Link>
