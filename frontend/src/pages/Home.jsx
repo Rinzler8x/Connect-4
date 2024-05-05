@@ -1,13 +1,13 @@
 import NavBar from "../components/NavBar";
 import './pages stylesheets/styleHome.css';
-import PlayCard from "../components/PlayCards";
+import PlayCards from "../components/PlayCards";
 
 
 function Home() {
     return (
         <>
             <NavBar />
-            <PlayCard />
+            <PlayCards />
         </>
     );
 }

@@ -1,14 +1,5 @@
-.top-row {
-  display: flex;
-}
-
-.top-row-button {
-  flex: 1;
-  max-width: 120px;
-  height: 50px;
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
+.d-grid{
+  padding-bottom: 10px;
 }
 
 .container {
@@ -18,32 +9,36 @@
   height: 100vh;
 }
 
-.center {
-  text-align: center;
+.board-cell {
+  width: 100px;       /* Maintain the cell size */
+  height: 100px;      /* Maintain the cell size */
+  margin: 0px;        /* Small margin for spacing */
+  display: flex;      /* Ensures content is centered */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: #002366; /* Makes gaps black if circle doesn't fill cell */
 }
 
-.board-container {
-  display: inline-block;
+.circle {
+  width: 80px;        /* Smaller than the cell to create a padding effect */
+  height: 80px;       /* Smaller than the cell to create a padding effect */
+  background-color: #f8f9fa; /* Default light background color */
+  border-radius: 50%; /* Makes the div circular */
+}
+
+.red {
+  background-color: red; /* Red color for one player */
+}
+
+.yellow {
+  background-color: yellow; /* Yellow color for the other player */
 }
 
 .board-row {
   display: flex;
+  background-color: #002366;
 }
 
-.board-cell {
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
-}
-
-.red {
-  background-color: red;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.d-grid{
-  padding-bottom: 10px;
+.board-container {
+  display: inline-block;
 }

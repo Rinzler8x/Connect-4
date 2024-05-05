@@ -18,7 +18,7 @@ function Card({ header, title, description, path }) {
 }
 
 
-function PlayCard() {
+function PlayCards() {
   return (
     <>
       <div className="container text-center">
@@ -59,4 +59,4 @@ function PlayCard() {
   );
 }
 
-export default PlayCard;
+export default PlayCards;

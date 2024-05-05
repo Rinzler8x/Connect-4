@@ -49,7 +49,7 @@ function Connect4PvP() {
   return (
     <>
       <div className="container">
-        <div className="center">
+        <div className="text-center">
           <div className="d-grid d-md-block">
             {topRowButtons.map((buttonValue, index) => (
               <button
@@ -67,10 +67,11 @@ function Connect4PvP() {
             {board.map((row, rowIndex) => (
               <div key={rowIndex} className="board-row">
                 {row.map((cell, cellIndex) => (
-                  <div
-                    key={cellIndex}
-                    className={`board-cell ${cell === 1 ? 'red' : cell === 2 ? 'yellow' : ''}`}
-                  ></div>
+                  <div key={cellIndex} className='board-cell'>
+                    <div
+                      className={`circle ${cell === 1 ? 'red' : cell === 2 ? 'yellow' : ''}`}
+                    ></div>
+                  </div>
                 ))}
               </div>
             ))}
