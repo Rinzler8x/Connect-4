@@ -74,7 +74,7 @@ function Connect4AlphaBeta() {
     return (
         <>
             <div className="container">
-                <div className="center">
+                <div className="text-center">
                     <div className="d-grid d-md-block">
                         {topRowButtons.map((buttonValue, index) => (
                             <button
