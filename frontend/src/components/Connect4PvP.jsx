@@ -26,7 +26,6 @@ function Connect4PvP() {
         if (data.message) {
           setWinnerMessage(data.message);
         }
-        setAnimate(false);
       })
       .catch(error => {
         console.error('Error:', error);
