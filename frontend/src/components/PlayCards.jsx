@@ -18,40 +18,40 @@ function Card({ header, title, description, path }) {
 }
 
 
-function PlayCard() {
+function PlayCards() {
   return (
     <>
       <div className="container text-center">
         <div className="row row-cols-1 row-cols-md-3 g-4 ">
 
           {/* PvP card */}
-          <div className="col d-flex justify-content-center">
+          <div className="col d-flex justify-content-center my-3">
             <Card
               header={"P v P"}
               title={"Player vs Player"}
               description={"2 players go head to head."}
               // buttonMargin={"btn btn-dark btn-outline-light mt-3"}
-              path={"/connect4/?gameMode=pvp"} />
+              path={"/connect4pvp"} />
           </div>
 
           {/* easy card */}
-          <div className="col d-flex justify-content-center">
+          <div className="col d-flex justify-content-center my-3">
             <Card
               header={"Easy"}
               title={"Player vs AI"}
               description={"Player goes head to head with AI."}
               // buttonMargin={"btn btn-dark btn-outline-light mt-3"}
-              path={"/connect4/?gameMode=easy"} />
+              path={"/connect4minmax"} />
           </div>
 
           {/* hard card */}
-          <div className="col d-flex justify-content-center">
+          <div className="col d-flex justify-content-center my-3">
             <Card
               header={"Hard"}
               title={"Player vs AI"}
               description={"Player goes head to head with AI."}
               // buttonMargin={"btn btn-dark btn-outline-light mt-3"}
-              path={"/connect4/?gameMode=hard"} />
+              path={"/connect4alphabeta"} />
           </div>
         </div >
       </div>
@@ -59,4 +59,4 @@ function PlayCard() {
   );
 }
 
-export default PlayCard;
+export default PlayCards;

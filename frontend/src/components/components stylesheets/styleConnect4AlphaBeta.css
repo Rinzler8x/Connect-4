@@ -1,14 +1,5 @@
-.top-row {
-  display: flex;
-}
-
-.top-row-button {
-  flex: 1;
-  max-width: 120px;
-  height: 50px;
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
+.d-grid {
+  padding-bottom: 10px;
 }
 
 .container {
@@ -18,32 +9,68 @@
   height: 100vh;
 }
 
-.center {
-  text-align: center;
+.spacer {
+  padding-bottom: 100px;
 }
 
-.board-container {
-  display: inline-block;
-}
-
-.board-row {
+/* .game-container {
   display: flex;
-}
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 900px;
+} */
 
 .board-cell {
   width: 100px;
+  /* Maintain the cell size */
   height: 100px;
-  border: 1px solid black;
+  /* Maintain the cell size */
+  margin: 0px;
+  /* Small margin for spacing */
+  display: flex;
+  /* Ensures content is centered */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  background-color: #002366;
+  /* Makes gaps black if circle doesn't fill cell */
+}
+
+.circle {
+  width: 82px;
+  /* Smaller than the cell to create a padding effect */
+  height: 82px;
+  /* Smaller than the cell to create a padding effect */
+  background-color: #f8f9fa;
+  /* Default light background color */
+  border-radius: 50%;
+  /* Makes the div circular */
 }
 
 .red {
   background-color: red;
+  /* Red color for one player */
 }
 
 .yellow {
   background-color: yellow;
+  /* Yellow color for the other player */
 }
 
-.d-grid{
-  padding-bottom: 10px;
+.board-row {
+  display: flex;
+  background-color: #002366;
+}
+
+.board-container {
+  display: inline-block;
 }

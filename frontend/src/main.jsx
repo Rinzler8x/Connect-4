@@ -5,8 +5,11 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
-import About from './pages/About';
 import Connect4 from './pages/Connect4';
+import HowToPlay from './pages/HowToPlay';
+import Connect4PvP from './components/Connect4PvP';
+import Connect4MinMax from './components/Connect4MinMax';
+import Connect4AlphaBeta from './components/Connect4AlphaBeta';
 
 const router = createBrowserRouter([
   {
@@ -14,12 +17,24 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/about",
-    element: <About />,
-  },
-  {
     path: "/connect4",
     element: <Connect4 />
+  },
+  {
+    path: "/howtoplay",
+    element: <HowToPlay />
+  },
+  {
+    path: "/connect4pvp",
+    element: <Connect4PvP />
+  },
+  {
+    path: "/connect4minmax",
+    element: <Connect4MinMax />
+  },
+  {
+    path: "/connect4alphabeta",
+    element: <Connect4AlphaBeta />
   }
 ]);
 
