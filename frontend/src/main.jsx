@@ -7,6 +7,7 @@ import {
 import App from './App';
 import About from './pages/About';
 import Connect4 from './pages/Connect4';
+import HowToPlay from './pages/HowToPlay';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/connect4",
     element: <Connect4 />
+  },
+  {
+    path: "/howtoplay",
+    element: <HowToPlay />
   }
 ]);
 

@@ -3,19 +3,15 @@ import Connect4AlphaBeta from "../components/Connect4AlphaBeta";
 import Connect4PvP from "../components/Connect4PvP";
 import NavBar from "../components/NavBar";
 import Connect4MinMax from "../components/Connect4MinMax";
+import PlayCards from "../components/PlayCards";
+import home_page from "../assets/home_page.jpg";
 
 function Connect4() {
-
-    const location = useLocation();
-    const query = new URLSearchParams(location.search);
-    const gameMode = query.get('gameMode');
-
     return (
         <>
-            <NavBar />
-            {gameMode === 'pvp' && <Connect4PvP />}
-            {gameMode === 'easy' && <Connect4MinMax />}
-            {gameMode === 'hard' && <Connect4AlphaBeta />}
+            <div className="d-flex justify-content-center" style={{ width: '100vw', height: '100vh', backgroundImage: `url(${home_page})` }}>
+                <PlayCards />
+            </div>
         </>
     );
 }

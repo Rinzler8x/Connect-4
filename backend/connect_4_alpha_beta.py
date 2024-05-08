@@ -8,7 +8,7 @@ import math
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Change this to your frontend URL in production
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["POST"],
     allow_headers=["Content-Type"],
@@ -172,6 +172,9 @@ def get_valid_locations(board):
         if is_valid_location(board, col):
             valid_locations.append(col)
     return valid_locations
+
+def check_draw(board):
+  return len(get_valid_locations(board)) == 0
                 
 class ButtonClick(BaseModel):
     value: str
@@ -210,23 +213,35 @@ async def player_turn(button_click: ButtonClick):
         drop_piece(board, row, col, PLAYER_PIECE)
         board_flipped = np.flip(board, 0)
         np_board = board_flipped.tolist()
+        
         if winning_move(board, PLAYER_PIECE):
             reset_board() 
             return {"message":"Player 1 Wins!", "board": np_board}
+        
+        if check_draw(board):
+            reset_board()
+            return{"message":"Draw Game!", "board": np_board}
+        
         turn = AI
         return {"received_value": col, "board": np_board, "turn": turn}
 
 @app.get("/api/connect-4/alpha-beta/ai-turn")
 async def ai_turn():
     global turn
-    col, minimax_alphabeta_score = minimax_alphabeta(board, 6, -math.inf, math.inf, True)
     if turn == AI:
-        row = get_next_open_row(board, col)
-        drop_piece(board, row, col, AI_PIECE)
-        board_flipped = np.flip(board, 0)
-        np_board = board_flipped.tolist()
-        if winning_move(board, AI_PIECE):
-            reset_board()
-            return {"message":"Player 2 Wins!", "board": np_board}
-        turn = PLAYER
-        return {"received_value": col, "board": np_board, "turn": turn}
+        col, minimax_alphabeta_score = minimax_alphabeta(board, 6, -math.inf, math.inf, True)
+        if col is not None:
+            row = get_next_open_row(board, col)
+            drop_piece(board, row, col, AI_PIECE)
+            board_flipped = np.flip(board, 0)
+            np_board = board_flipped.tolist()
+            if winning_move(board, AI_PIECE):
+                reset_board()
+                return {"message":"Player 2 Wins!", "board": np_board}
+            turn = PLAYER
+            return {"received_value": col, "board": np_board, "turn": turn}
+        else:
+            board_flipped = np.flip(board, 0)
+            np_board = board_flipped.tolist()
+            return{"message":"Draw Game!", "board": np_board}
+        

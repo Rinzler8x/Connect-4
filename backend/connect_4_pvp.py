@@ -7,7 +7,7 @@ import random
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Change this to your frontend URL in production
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["POST"],
     allow_headers=["Content-Type"],
@@ -59,6 +59,16 @@ def winning_move(board, piece):
 		for r in range(3, ROW_COUNT):
 			if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c+2] == piece and board[r-3][c+3] == piece:
 				return True
+  
+def get_valid_locations(board):
+    valid_locations = []
+    for col in range(COLUMN_COUNT):
+        if is_valid_location(board, col):
+            valid_locations.append(col)
+    return valid_locations
+  
+def check_draw(board):
+  return len(get_valid_locations(board)) == 0
 
 board = create_board()
 turn = 0
@@ -86,19 +96,24 @@ async def button_click(button_click: ButtonClick):
   global turn
   
   if not is_valid_location(board, col):
-        # Column is full, return an appropriate response
-        board_flipped = np.flip(board, 0)
-        np_board = board_flipped.tolist()
-        return {"message": "Column is full, choose another column.", "board": np_board, "turn": turn}
+    # Column is full, return an appropriate response
+    board_flipped = np.flip(board, 0)
+    np_board = board_flipped.tolist()
+    return {"message": "Column is full, choose another column.", "board": np_board, "turn": turn}
   
   if turn == PLAYER1:
     row = get_next_open_row(board, col)
     drop_piece(board, row, col, PLAYER1_PIECE)
     board_flipped = np.flip(board, 0)
     np_board = board_flipped.tolist()
+    
     if winning_move(board, PLAYER1_PIECE):
       reset_board()
       return {"message":"Player 1 Wins!", "board": np_board}
+    
+    if check_draw(board):
+      reset_board()
+      return {"message": "Game is a draw!", "board": np_board}
     
     turn = PLAYER2
     return {"received_value": col, "board": np_board, "turn": turn}
@@ -108,9 +123,14 @@ async def button_click(button_click: ButtonClick):
     drop_piece(board, row, col, PLAYER2_PIECE)
     board_flipped = np.flip(board, 0)
     np_board = board_flipped.tolist()
+    
     if winning_move(board, PLAYER2_PIECE):
       reset_board() 
       return {"message":"Player 2 Wins!", "board": np_board}
+    
+    if check_draw(board):
+      reset_board()
+      return {"message": "Game is a draw!", "board": np_board}
     
     turn = PLAYER1
     return {"received_value": col, "board": np_board, "turn": turn}
