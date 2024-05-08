@@ -1,0 +1,1 @@
+uvicorn connect_4_min_max:app --reload --port 8001
