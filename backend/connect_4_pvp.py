@@ -109,14 +109,14 @@ async def button_click(button_click: ButtonClick):
     
     if winning_move(board, PLAYER1_PIECE):
       reset_board()
-      return {"message":"Player 1 Wins!", "board": np_board}
+      return {"message":"Player 1 Wins!", "board": np_board, "turn": turn}
     
     if check_draw(board):
       reset_board()
       return {"message": "Game is a draw!", "board": np_board}
     
     turn = PLAYER2
-    return {"received_value": col, "board": np_board, "turn": turn}
+    return {"received_value": col, "board": np_board, "turn": turn, "turn": turn}
         
   else:
     row = get_next_open_row(board, col)
@@ -126,11 +126,11 @@ async def button_click(button_click: ButtonClick):
     
     if winning_move(board, PLAYER2_PIECE):
       reset_board() 
-      return {"message":"Player 2 Wins!", "board": np_board}
+      return {"message":"Player 2 Wins!", "board": np_board, "turn": turn}
     
     if check_draw(board):
       reset_board()
-      return {"message": "Game is a draw!", "board": np_board}
+      return {"message": "Game is a draw!", "board": np_board, "turn": turn}
     
     turn = PLAYER1
     return {"received_value": col, "board": np_board, "turn": turn}

@@ -31,7 +31,7 @@ function PlayCards() {
               title={"Player vs Player"}
               description={"2 players go head to head."}
               // buttonMargin={"btn btn-dark btn-outline-light mt-3"}
-              path={"/connect4/?gameMode=pvp"} />
+              path={"/connect4pvp"} />
           </div>
 
           {/* easy card */}
@@ -41,7 +41,7 @@ function PlayCards() {
               title={"Player vs AI"}
               description={"Player goes head to head with AI."}
               // buttonMargin={"btn btn-dark btn-outline-light mt-3"}
-              path={"/connect4/?gameMode=easy"} />
+              path={"/connect4minmax"} />
           </div>
 
           {/* hard card */}
@@ -51,7 +51,7 @@ function PlayCards() {
               title={"Player vs AI"}
               description={"Player goes head to head with AI."}
               // buttonMargin={"btn btn-dark btn-outline-light mt-3"}
-              path={"/connect4/?gameMode=hard"} />
+              path={"/connect4alphabeta"} />
           </div>
         </div >
       </div>
