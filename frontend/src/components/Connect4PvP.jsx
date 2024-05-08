@@ -63,45 +63,45 @@ function Connect4PvP() {
           borderRadius: '8px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           padding: '400px 0 400px 0',
-          width: '80%',, "game_over": 1
-        maxWidth: '900px',
-        margin: 'auto'
+          width: '80%',
+          maxWidth: '900px',
+          margin: 'auto'
         }}>
-        <div className="text-center">
-          <div className="d-grid d-md-block">
-            {topRowButtons.map((buttonValue, index) => (
-              <button
-                key={index}
-                value={buttonValue}
-                onClick={handleClick}
-                type="button"
-                className="btn btn-secondary mx-3 "
-              >
-                {/* Column {buttonValue} */}
-                Drop
-              </button>
-            ))}
-          </div>
-          <div className="board-container">
-            {board.map((row, rowIndex) => (
-              <div key={rowIndex} className="board-row">
-                {row.map((cell, cellIndex) => (
-                  <div key={cellIndex} className='board-cell'>
-                    <div
-                      className={`circle ${cell === 1 ? 'red' : cell === 2 ? 'yellow' : ''}`}
-                    ></div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-          <div>
-            {winnerMessage && <p style={{ color: 'black', padding: '20px 0 0 0', fontFamily: 'Arial' }}>{winnerMessage}</p>}
-            <button onClick={handleReset} type="button" className="btn btn-secondary mt-3">Reset Game</button>
+          <div className="text-center">
+            <div className="d-grid d-md-block">
+              {topRowButtons.map((buttonValue, index) => (
+                <button
+                  key={index}
+                  value={buttonValue}
+                  onClick={handleClick}
+                  type="button"
+                  className="btn btn-secondary mx-3 "
+                >
+                  {/* Column {buttonValue} */}
+                  Drop
+                </button>
+              ))}
+            </div>
+            <div className="board-container">
+              {board.map((row, rowIndex) => (
+                <div key={rowIndex} className="board-row">
+                  {row.map((cell, cellIndex) => (
+                    <div key={cellIndex} className='board-cell'>
+                      <div
+                        className={`circle ${cell === 1 ? 'red' : cell === 2 ? 'yellow' : ''}`}
+                      ></div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div>
+              {winnerMessage && <p style={{ color: 'black', padding: '20px 0 0 0', fontFamily: 'Arial' }}>{winnerMessage}</p>}
+              <button onClick={handleReset} type="button" className="btn btn-secondary mt-3">Reset Game</button>
+            </div>
           </div>
         </div>
-      </div>
-    </div >
+      </div >
     </>
   );
 }
