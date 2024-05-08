@@ -193,9 +193,13 @@ async def reset_click():
     board = create_board()
     game_over = False
     turn = random.randint(PLAYER, AI)
+    if(turn == PLAYER):
+        mes = "Turn: Player"
+    else:
+        mes = "Turn: AI"
     board_flipped = np.flip(board, 0)
     np_board = board_flipped.tolist()
-    return {"board": np_board, "turn": turn}
+    return {"message": mes, "board": np_board, "turn": turn}
 
 @app.post("/api/connect-4/alpha-beta/player-turn")
 async def player_turn(button_click: ButtonClick):
@@ -206,7 +210,7 @@ async def player_turn(button_click: ButtonClick):
         # Column is full, return an appropriate response
         board_flipped = np.flip(board, 0)
         np_board = board_flipped.tolist()
-        return {"message": "Column is full, choose another column.", "board": np_board, "turn": turn}
+        return {"message": "Column is full, choose another column.", "board": np_board, "turn": turn, "game_over": 0}
     
     if turn == PLAYER:
         row = get_next_open_row(board, col)
@@ -216,14 +220,14 @@ async def player_turn(button_click: ButtonClick):
         
         if winning_move(board, PLAYER_PIECE):
             reset_board() 
-            return {"message":"Player 1 Wins!", "board": np_board}
+            return {"message":"Player 1 Wins!", "board": np_board, "game_over": 1}
         
         if check_draw(board):
             reset_board()
-            return{"message":"Draw Game!", "board": np_board}
+            return{"message":"Draw Game!", "board": np_board, "game_over": 1}
         
         turn = AI
-        return {"received_value": col, "board": np_board, "turn": turn}
+        return {"message": "Turn: AI", "board": np_board, "turn": turn, "game_over": 0}
 
 @app.get("/api/connect-4/alpha-beta/ai-turn")
 async def ai_turn():
@@ -237,11 +241,11 @@ async def ai_turn():
             np_board = board_flipped.tolist()
             if winning_move(board, AI_PIECE):
                 reset_board()
-                return {"message":"Player 2 Wins!", "board": np_board}
+                return {"message":"Player 2 Wins!", "board": np_board, "game_over": 1}
             turn = PLAYER
-            return {"received_value": col, "board": np_board, "turn": turn}
+            return {"message": "Turn: Player", "board": np_board, "turn": turn, "game_over": 0}
         else:
             board_flipped = np.flip(board, 0)
             np_board = board_flipped.tolist()
-            return{"message":"Draw Game!", "board": np_board}
+            return{"message":"Draw Game!", "board": np_board, "game_over": 1}
         

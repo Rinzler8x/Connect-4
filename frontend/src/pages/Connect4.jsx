@@ -1,8 +1,3 @@
-import { useLocation } from "react-router-dom";
-import Connect4AlphaBeta from "../components/Connect4AlphaBeta";
-import Connect4PvP from "../components/Connect4PvP";
-import NavBar from "../components/NavBar";
-import Connect4MinMax from "../components/Connect4MinMax";
 import PlayCards from "../components/PlayCards";
 import home_page from "../assets/home_page.jpg";
 

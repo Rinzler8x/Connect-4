@@ -88,7 +88,7 @@ async def reset_click():
     turn = random.randint(PLAYER1, PLAYER2)
     board_flipped = np.flip(board, 0)
     np_board = board_flipped.tolist()
-    return {"board": np_board}
+    return {"message": f"Turn: Player {turn+1}", "board": np_board}
 
 @app.post("/api/connect-4/pvp/player-turn")
 async def button_click(button_click: ButtonClick):
@@ -116,7 +116,7 @@ async def button_click(button_click: ButtonClick):
       return {"message": "Game is a draw!", "board": np_board}
     
     turn = PLAYER2
-    return {"received_value": col, "board": np_board, "turn": turn, "turn": turn}
+    return {"message": "Turn: Player 2", "board": np_board, "turn": turn, "turn": turn}
         
   else:
     row = get_next_open_row(board, col)
@@ -133,4 +133,4 @@ async def button_click(button_click: ButtonClick):
       return {"message": "Game is a draw!", "board": np_board, "turn": turn}
     
     turn = PLAYER1
-    return {"received_value": col, "board": np_board, "turn": turn}
+    return {"message": "Turn: Player 1", "board": np_board, "turn": turn}

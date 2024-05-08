@@ -1,4 +1,4 @@
-.d-grid{
+.d-grid {
   padding-bottom: 10px;
 }
 
@@ -9,29 +9,61 @@
   height: 100vh;
 }
 
+.spacer {
+  padding-bottom: 100px;
+}
+
+/* .game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 900px;
+} */
+
 .board-cell {
-  width: 100px;       /* Maintain the cell size */
-  height: 100px;      /* Maintain the cell size */
-  margin: 0px;        /* Small margin for spacing */
-  display: flex;      /* Ensures content is centered */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  background-color: #002366; /* Makes gaps black if circle doesn't fill cell */
+  width: 100px;
+  /* Maintain the cell size */
+  height: 100px;
+  /* Maintain the cell size */
+  margin: 0px;
+  /* Small margin for spacing */
+  display: flex;
+  /* Ensures content is centered */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  background-color: #002366;
+  /* Makes gaps black if circle doesn't fill cell */
 }
 
 .circle {
-  width: 82px;        /* Smaller than the cell to create a padding effect */
-  height: 82px;       /* Smaller than the cell to create a padding effect */
-  background-color: #f8f9fa; /* Default light background color */
-  border-radius: 50%; /* Makes the div circular */
+  width: 82px;
+  /* Smaller than the cell to create a padding effect */
+  height: 82px;
+  /* Smaller than the cell to create a padding effect */
+  background-color: #f8f9fa;
+  /* Default light background color */
+  border-radius: 50%;
+  /* Makes the div circular */
 }
 
 .red {
-  background-color: red; /* Red color for one player */
+  background-color: red;
+  /* Red color for one player */
 }
 
 .yellow {
-  background-color: yellow; /* Yellow color for the other player */
+  background-color: yellow;
+  /* Yellow color for the other player */
 }
 
 .board-row {

@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 function HowToPlay() {
   return (
     <>
-      <div className="d-flex justify-content-center" style={{ width: '100vw', height: '100vh', backgroundImage: `url(${how_to_play})` }}>
-        <div className="card text-center" style={{ width: '36rem', height: '32rem', marginTop: '15em', fontSize: '16px', borderRadius: '30px' }}>
+      <div className="d-flex justify-content-center" style={{ width: 'auto', height: '100vh', backgroundImage: `url(${how_to_play})` }}>
+        <div className="card text-center" style={{ width: '36rem', height: '32rem', marginTop: '12em', fontSize: '16px', borderRadius: '30px' }}>
           <div className="card-body">
             <h5 className="card-title mb-4"
               style={{
