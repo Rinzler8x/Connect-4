@@ -84,9 +84,9 @@ function Connect4AlphaBeta() {
                     border: '1px solid #ccc',
                     borderRadius: '8px',
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                    padding: '400px 0 400px 0',
+                    padding: '350px 0 330px 0',
                     width: '80%',
-                    maxWidth: '900px',
+                    maxWidth: '750px',
                     margin: 'auto'
                 }}>
                     <div className="text-center">
@@ -97,7 +97,8 @@ function Connect4AlphaBeta() {
                                     value={buttonValue}
                                     onClick={handleClick}
                                     type="button"
-                                    className="btn btn-secondary mx-3"
+                                    className="btn btn-secondary"
+                                    style={{ margin: '0 10px 0 11px'}}
                                 >
                                     {/* Column {buttonValue} */}
                                     Drop

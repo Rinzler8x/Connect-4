@@ -29,9 +29,9 @@
 } */
 
 .board-cell {
-  width: 100px;
+  width: 80px;
   /* Maintain the cell size */
-  height: 100px;
+  height: 80px;
   /* Maintain the cell size */
   margin: 0px;
   /* Small margin for spacing */
@@ -46,9 +46,9 @@
 }
 
 .circle {
-  width: 82px;
+  width: 62px;
   /* Smaller than the cell to create a padding effect */
-  height: 82px;
+  height: 62px;
   /* Smaller than the cell to create a padding effect */
   background-color: #f8f9fa;
   /* Default light background color */
