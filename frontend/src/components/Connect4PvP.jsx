@@ -75,6 +75,7 @@ function Connect4PvP() {
                   onClick={handleClick}
                   type="button"
                   className="btn btn-secondary mx-3 "
+                  style={{ margin: '0 21px 0 21px'}}
                 >
                   {/* Column {buttonValue} */}
                   Drop
