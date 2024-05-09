@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './components stylesheets/styleConnect4AlphaBeta.css';
-// import game_page from '../assets/game_page.jpeg';
-import game_page from "../assets/home_page.jpg";
+import game_page from '../assets/game_page1.jpg';
+// import game_page from "../assets/home_page.jpg";
 
 function Connect4PvP() {
   const [board, setBoard] = useState([]);
@@ -50,7 +50,7 @@ function Connect4PvP() {
 
   return (
     <>
-      <div className='d-flex justify-content-center' style={{ width: '100vw', height: '100vh', backgroundImage: `url(${game_page})` }}>
+      <div className='d-flex justify-content-center' style={{ width: '100vw', height: '100vh', backgroundImage: `url(${game_page})`, position: 'absolute', backgroundSize: 'cover', backgroundPosition: 'center' }}>
         {/* <div className='spacer'></div> */}
         <div className="game-container" style={{
           display: 'flex',
@@ -59,7 +59,7 @@ function Connect4PvP() {
           height: '85vh',
           backgroundColor: 'white',
           border: '1px solid #ccc',
-          borderRadius: '8px',
+          borderRadius: '65px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           padding: '350px 0 330px 0',
           width: '80%',
@@ -75,7 +75,7 @@ function Connect4PvP() {
                   onClick={handleClick}
                   type="button"
                   className="btn btn-secondary"
-                  style={{ margin: '0 10px 0 11px'}}
+                  style={{ margin: '0 10px 0 10px', fontFamily: 'Arial'}}
                 >
                   {/* Column {buttonValue} */}
                   Drop
@@ -97,7 +97,7 @@ function Connect4PvP() {
             </div>
             <div>
               {winnerMessage && <p style={{ color: 'black', padding: '20px 0 0 0', fontFamily: 'Arial' }}>{winnerMessage}</p>}
-              <button onClick={handleReset} type="button" className="btn btn-secondary mt-3">Reset Game</button>
+              <button onClick={handleReset} type="button" className="btn btn-secondary mt-3" style={{ fontFamily: 'Arial'}}>Reset Game</button>
             </div>
           </div>
         </div>

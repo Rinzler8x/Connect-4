@@ -6,12 +6,12 @@ function Card({ header, title, description, path, icon }) {
   return (
     <>
       <div className="card border-info text-center" style={{ width: '20rem' }}>
-        <div className="card-header">{header}</div>
+        <div className="card-header" style={{fontFamily: 'Arial'}}>{header}</div>
         <img src={icon} className="card-img-top my-2 mx-auto" alt="image" style={{ width: '256px', height: '256px' }} />
         <div className="card-body border-top">
-          <h5 className="card-title mt-3">{title}</h5>
-          <p className="card-text">{description}</p>
-          <Link to={path} className="btn btn-dark btn-outline-light mt-3">Start</Link>
+          <h5 className="card-title mt-3" style={{fontFamily: 'Arial'}}>{title}</h5>
+          <p className="card-text" style={{fontFamily: 'Arial'}}>{description}</p>
+          <Link to={path} className="btn btn-dark btn-outline-light mt-3" style={{fontFamily: 'Arial'}}>Start</Link>
         </div>
       </div >
     </>

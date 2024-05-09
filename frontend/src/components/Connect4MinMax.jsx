@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './components stylesheets/styleConnect4AlphaBeta.css';
-import game_page from "../assets/home_page.jpg";
+// import game_page from "../assets/home_page.jpg";
+import game_page from '../assets/game_page1.jpg';
+
 
 function Connect4MinMax() {
     const [board, setBoard] = useState([]);
@@ -74,7 +76,7 @@ function Connect4MinMax() {
 
     return (
         <>
-            <div className='d-flex justify-content-center' style={{ width: '100vw', height: '100vh', backgroundImage: `url(${game_page})` }}>
+            <div className='d-flex justify-content-center' style={{ width: '100vw', height: '100vh', backgroundImage: `url(${game_page})`, position: 'absolute', backgroundSize: 'cover', backgroundPosition: 'center'}}>
                 <div className="game-container" style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -82,11 +84,11 @@ function Connect4MinMax() {
                     height: '85vh',
                     backgroundColor: 'white',
                     border: '1px solid #ccc',
-                    borderRadius: '8px',
+                    borderRadius: '65px',
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                    padding: '400px 0 400px 0',
+                    padding: '350px 0 330px 0',
                     width: '80%',
-                    maxWidth: '900px',
+                    maxWidth: '750px',
                     margin: 'auto'
                 }}>
                     <div className="text-center">
@@ -97,7 +99,8 @@ function Connect4MinMax() {
                                     value={buttonValue}
                                     onClick={handleClick}
                                     type="button"
-                                    className="btn btn-secondary mx-3"
+                                    className="btn btn-secondary"
+                                    style={{ margin: '0 10px 0 10px', fontFamily: 'Arial'}}
                                 >
                                     {/* Column {buttonValue} */}
                                     Drop
@@ -118,8 +121,8 @@ function Connect4MinMax() {
                             ))}
                         </div>
                         <div>
-                            {winnerMessage && <p style={{ color: 'black', padding: '20px 0 0 0', fontFamily: 'Arial' }}>{winnerMessage}</p>}
-                            <button onClick={handleReset} type="button" className="btn btn-secondary mt-3">Reset Game</button>
+                            {winnerMessage && <p style={{ color: 'black', padding: '20px 0 0 0', fontFamily: 'Arial'}}>{winnerMessage}</p>}
+                            <button onClick={handleReset} type="button" className="btn btn-secondary mt-3" style={{fontFamily: 'Arial'}}>Reset Game</button>
                         </div>
                     </div>
                 </div>
