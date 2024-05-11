@@ -75,7 +75,7 @@ function Connect4PvP() {
                   onClick={handleClick}
                   type="button"
                   className="btn btn-secondary"
-                  style={{ margin: '0 10px 0 10px', fontFamily: 'Arial'}}
+                  style={{ margin: '0 10px 0 10px', fontFamily: 'Arial' }}
                 >
                   {/* Column {buttonValue} */}
                   Drop
@@ -97,7 +97,7 @@ function Connect4PvP() {
             </div>
             <div>
               {winnerMessage && <p style={{ color: 'black', padding: '20px 0 0 0', fontFamily: 'Arial' }}>{winnerMessage}</p>}
-              <button onClick={handleReset} type="button" className="btn btn-secondary mt-3" style={{ fontFamily: 'Arial'}}>Reset Game</button>
+              <button onClick={handleReset} type="button" className="btn btn-secondary mt-3" style={{ fontFamily: 'Arial' }}>Reset Game</button>
             </div>
           </div>
         </div>
