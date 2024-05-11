@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './components stylesheets/styleConnect4AlphaBeta.css';
 import game_page from '../assets/game_page1.jpg';
-// import game_page from "../assets/home_page.jpg";
 
 function Connect4PvP() {
   const [board, setBoard] = useState([]);
