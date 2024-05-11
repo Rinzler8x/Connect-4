@@ -101,7 +101,6 @@ function Connect4MinMax() {
                   className="btn btn-secondary"
                   style={{ margin: '0 10px 0 10px', fontFamily: 'Arial' }}
                 >
-                  {/* Column {buttonValue} */}
                   Drop
                 </button>
               ))}

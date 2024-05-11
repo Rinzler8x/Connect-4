@@ -50,7 +50,6 @@ function Connect4PvP() {
   return (
     <>
       <div className='d-flex justify-content-center' style={{ width: '100vw', height: '100vh', backgroundImage: `url(${game_page})`, position: 'absolute', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        {/* <div className='spacer'></div> */}
         <div className="game-container" style={{
           display: 'flex',
           justifyContent: 'center',
@@ -76,7 +75,6 @@ function Connect4PvP() {
                   className="btn btn-secondary"
                   style={{ margin: '0 10px 0 10px', fontFamily: 'Arial' }}
                 >
-                  {/* Column {buttonValue} */}
                   Drop
                 </button>
               ))}
