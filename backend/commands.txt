@@ -1,3 +1,4 @@
+source .venv/bin/activate
 uvicorn connect_4_pvp:app --reload
 uvicorn connect_4_min_max:app --reload --port 8001
 uvicorn connect_4_alpha_beta:app --reload --port 8002
